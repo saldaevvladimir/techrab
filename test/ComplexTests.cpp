@@ -6,7 +6,7 @@ TEST (ComplexTests, DefaultConstructorTest)
 {
     Complex num;
 
-    bool correct_num = (are_eq(num.real(), 0.0f) && are_eq(num.imag(), 0.0f));
+    bool correct_num = (are_eq(num.real(), 0.0) && are_eq(num.imag(), 0.0));
 
     ASSERT_TRUE(correct_num); 
 }
@@ -15,7 +15,7 @@ TEST (ComplexTests, ParameterConstructor1Test)
 {
     Complex num(3.14f);
 
-    bool correct_num = (are_eq(num.real(), 3.14f) && are_eq(num.imag(), 0.0f));
+    bool correct_num = (are_eq(num.real(), 3.14f) && are_eq(num.imag(), 0.0));
 
     ASSERT_TRUE(correct_num);
 }
@@ -24,7 +24,7 @@ TEST (ComplexTests, ParameterConstructor2Test)
 {
     Complex num(3.14, 3.14);
 
-    bool correct_num = (are_eq(num.real(), 3.14f) && are_eq(num.imag(), 3.14f));
+    bool correct_num = (are_eq(num.real(), 3.14) && are_eq(num.imag(), 3.14));
 
     ASSERT_TRUE(correct_num);
 }

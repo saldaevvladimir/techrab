@@ -2,41 +2,39 @@
 #include <iostream>
 #include <string>
 
-const float EPS = 1e-5f;
+constexpr double EPS = 1e-10;
 
 struct Complex
 {
 public:
-    Complex();
-    Complex(float real);
-    Complex(float real, float imag);
+    Complex(double real = 0.0, double imag = 0.0);
 
-    float real();
-    float imag();
+    double real() const;
+    double imag() const;
 
-    std::string to_string();
+    std::string to_string() const;
 
-    void set_real(float real);
-    void set_imag(float real);
+    void set_real(double real);
+    void set_imag(double real);
 
-    float abs();
+    double abs() const;
 
-    Complex pow(int exp);
+    Complex pow(int exp) const;
 
-    Complex operator+(Complex other);
-    Complex operator-(Complex other);
-    Complex operator*(Complex other);
-    Complex operator*(float num);
-    Complex operator/(Complex other);
-    Complex operator/(float num);
-    bool operator==(Complex other);
-    bool operator!=(Complex other);
+    Complex operator+(Complex other) const;
+    Complex operator-(Complex other) const;
+    Complex operator*(Complex other) const;
+    Complex operator*(double num) const;
+    Complex operator/(Complex other) const;
+    Complex operator/(double num) const;
+    bool operator==(Complex other) const;
+    bool operator!=(Complex other) const;
 
     friend std::ostream& operator<<(std::ostream& os, Complex obj);
 
 private:
-    float re, im;
+    double re, im;
 };
 
 
-bool are_eq(float num1, float num2);
+bool are_eq(double num1, double num2);

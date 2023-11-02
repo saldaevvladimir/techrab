@@ -3,92 +3,76 @@
 #include <exception>
 
 
-Complex::Complex()
-{
-    this->re = 0.0f;
-    this->im = 0.0f;
-}
+Complex::Complex(double real, double imag): re(real), im(imag) {}
 
-Complex::Complex(float real)
-{
-    this->re = real;
-    this->im = 0.0f;
-}
-
-Complex::Complex(float real, float imag)
-{
-    this->re = real;
-    this->im = imag;
-}
-
-float Complex::real()
+double Complex::real() const
 {
     return this->re;
 }
 
-float Complex::imag()
+double Complex::imag() const
 {
     return this->im;
 }
 
-std::string Complex::to_string()
+std::string Complex::to_string() const
 {
     return std::to_string(this->re) + "+" + std::to_string(this->im) + "i";
 }
 
-void Complex::set_real(float real)
+void Complex::set_real(double real)
 {
     this->re = real;
 }
 
-void Complex::set_imag(float imag)
+void Complex::set_imag(double imag)
 {
     this->im = imag;
 }
 
-float Complex::abs()
+double Complex::abs() const
 {
     return std::sqrt(std::pow(this->re, 2) + std::pow(this->im, 2));
 }
 
-Complex Complex::pow(int exp)
+Complex Complex::pow(int exp) const
 {
-    float abs = this->abs();
+    double abs = this->abs();
 
     if (std::fabs(abs) < EPS)
         throw std::exception("zero division");
 
-    float expphi = std::acos(this->re / abs) * exp;
+    double expphi = std::acos(this->re / abs) * exp;
 
-    float cos_expphi = std::cos(expphi);
-    float sin_expphi = std::sin(expphi);
+    double cos_expphi = std::cos(expphi);
+    double sin_expphi = std::sin(expphi);
 
     return Complex(cos_expphi, sin_expphi) * std::pow(abs, exp);
 }
 
-Complex Complex::operator+(Complex other)
+Complex Complex::operator+(Complex other) const
 {
     return Complex(this->re + other.re, this->im + other.im);
 }
 
-Complex Complex::operator-(Complex other)
+Complex Complex::operator-(Complex other) const
 {
     return Complex(this->re - other.re, this->im - other.im);
 }
 
-Complex Complex::operator*(Complex other)
+Complex Complex::operator*(Complex other) const
 {
     return Complex(this->re * other.re - this->im * other.im, this->re * other.im + this->im * other.re);
 }
 
-Complex Complex::operator*(float num)
+Complex Complex::operator*(double num) const
 {
     return Complex(this->re * num, this->im * num);
 }
 
-Complex Complex::operator/(Complex other)
+Complex Complex::operator/(Complex other) const
 {
-    float div = std::pow(other.re, 2) + std::pow(other.im, 2);
+    double div = std::pow(other.re, 2) + std::pow(other.im, 2);
 
     if (std::fabs(div) < EPS)
         throw std::exception("zero division (Complex(0, 0))");
@@ -96,7 +80,7 @@ Complex Complex::operator/(Complex other)
     return Complex((this->re * other.re + this->im * other.im), (this->im * other.re - this->re * other.im)) / div;
 }
 
-Complex Complex::operator/(float num)
+Complex Complex::operator/(double num) const
 {
     if (std::fabs(num) < EPS)
         throw std::exception("zero division");
@@ -104,12 +88,12 @@ Complex Complex::operator/(float num)
     return Complex(this->re / num, this->im / num);
 }
 
-bool Complex::operator==(Complex other)
+bool Complex::operator==(Complex other) const
 {
     return are_eq(this->re, other.re) && are_eq(this->im, other.im);
 }
 
-bool Complex::operator!=(Complex other)
+bool Complex::operator!=(Complex other) const
 {
     return !are_eq(this->re, other.re) || !are_eq(this->im, other.im);
 }
@@ -122,7 +106,7 @@ std::ostream &operator<<(std::ostream &os, Complex complex)
 }
 
 
-bool are_eq(float num1, float num2)
+bool are_eq(double num1, double num2)
 {
     return std::fabs(num1 - num2) <= EPS;
 }
