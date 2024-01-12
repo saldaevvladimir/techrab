@@ -40,7 +40,7 @@ Complex Complex::pow(int exp) const
     double abs = this->abs();
 
     if (std::fabs(abs) < EPS)
-        throw std::exception("zero division");
+        throw std::runtime_error("zero division");
 
     double expphi = std::acos(this->re / abs) * exp;
 
@@ -75,7 +75,7 @@ Complex Complex::operator/(Complex other) const
     double div = std::pow(other.re, 2) + std::pow(other.im, 2);
 
     if (std::fabs(div) < EPS)
-        throw std::exception("zero division (Complex(0, 0))");
+        throw std::runtime_error("zero division (Complex(0, 0))");
 
     return Complex((this->re * other.re + this->im * other.im), (this->im * other.re - this->re * other.im)) / div;
 }
@@ -83,7 +83,7 @@ Complex Complex::operator/(Complex other) const
 Complex Complex::operator/(double num) const
 {
     if (std::fabs(num) < EPS)
-        throw std::exception("zero division");
+        throw std::runtime_error("zero division");
 
     return Complex(this->re / num, this->im / num);
 }
